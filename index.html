@@ -4,14 +4,53 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/text-composer/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#f8e8ee" />
+    <meta name="theme-color" content="#fdf2f5" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="text-composer" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
     <title>text-composer</title>
   </head>
   <body>
-    <div id="app"></div>
+    <main id="app">
+      <header class="topbar">
+        <h1 class="brand">text-composer</h1>
+        <div class="toolbar">
+          <label class="toolbar-field">
+            <span>배경</span>
+            <select id="preset"></select>
+          </label>
+          <label class="toolbar-field">
+            <span>비율</span>
+            <select id="ratio">
+              <option value="1:1">1:1</option>
+              <option value="4:5" selected>4:5</option>
+              <option value="9:16">9:16</option>
+            </select>
+          </label>
+          <button id="export" class="btn-primary" type="button">PNG 저장</button>
+        </div>
+      </header>
+
+      <section class="workspace">
+        <div class="editor-pane">
+          <textarea
+            id="editor"
+            spellcheck="false"
+            placeholder='> "English line goes here."&#10;> (한글 번역 줄.)&#10;&#10;여기는 일반 서술 단락.&#10;&#10;*보조 톤 텍스트.* **굵게 강조.**'
+          ></textarea>
+        </div>
+        <div class="preview-pane">
+          <div id="frame" class="frame" data-ratio="4:5">
+            <article id="content" class="content"></article>
+          </div>
+        </div>
+      </section>
+    </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
