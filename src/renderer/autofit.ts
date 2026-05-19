@@ -5,7 +5,7 @@
  */
 
 export const MIN_FS = 11;
-export const MAX_FS = 22;
+export const MAX_FS = 15;
 const ITERATIONS = 10;
 
 export type FitResult = { fontSize: number; overflow: boolean };
