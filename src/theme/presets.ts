@@ -69,6 +69,51 @@ export const presets: Preset[] = [
       '--text-divider': 'rgba(255, 255, 255, 0.22)',
     },
   },
+  {
+    id: 'animal-crossing',
+    label: '동물의 숲',
+    vars: {
+      '--frame-c1': '#1f2a1c',
+      '--frame-c2': '#4a7a3e',
+      '--frame-c3': '#a8d8a0',
+      '--frame-c4': '#fff8e7',
+      '--text-body': '#fff8e7',
+      '--text-quote': '#ffd843',
+      '--text-strong': '#ffffff',
+      '--text-italic': 'rgba(255, 248, 231, 0.7)',
+      '--text-divider': 'rgba(255, 248, 231, 0.24)',
+    },
+  },
+  {
+    id: 'overgrown',
+    label: '오버그로운',
+    vars: {
+      '--frame-c1': '#1a2820',
+      '--frame-c2': '#3a5044',
+      '--frame-c3': '#7ec488',
+      '--frame-c4': '#d4e4c8',
+      '--text-body': '#d4e4c8',
+      '--text-quote': '#e8c860',
+      '--text-strong': '#ffffff',
+      '--text-italic': 'rgba(212, 228, 200, 0.7)',
+      '--text-divider': 'rgba(212, 228, 200, 0.24)',
+    },
+  },
+  {
+    id: 'needy',
+    label: '니디 스트리머 (Y2K 핑크)',
+    vars: {
+      '--frame-c1': '#1a1530',
+      '--frame-c2': '#4a2c5e',
+      '--frame-c3': '#c8b0e8',
+      '--frame-c4': '#ffb7e5',
+      '--text-body': '#f0e0ff',
+      '--text-quote': '#a8e0ec',
+      '--text-strong': '#ffffff',
+      '--text-italic': 'rgba(240, 224, 255, 0.7)',
+      '--text-divider': 'rgba(240, 224, 255, 0.24)',
+    },
+  },
 ];
 
 export function applyPreset(frame: HTMLElement, id: string): void {
