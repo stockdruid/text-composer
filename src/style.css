@@ -1,18 +1,39 @@
-/* ─── Tokens ─── */
+/* ═══════════════════════════════════════════════
+   text-composer — Liquid Glass theme
+   Multi-color gradient mesh + frosted glass card
+   ═══════════════════════════════════════════════ */
+
 :root {
-  --bg-app: #f2eaee;
-  --bg-frame: #fdf2f5;
-  --bg-frame-2: #f8e8ee;
-  --text-body: #2a2a2a;
-  --text-quote: #b8a8e8;
-  --text-muted: #6a6a6a;
-  --text-divider: rgba(42, 42, 42, 0.12);
-  --border: rgba(42, 42, 42, 0.12);
-  --surface: #ffffff;
-  --shadow-sm: 0 2px 8px rgba(40, 28, 89, 0.06);
-  --shadow-md: 0 6px 24px rgba(40, 28, 89, 0.1);
-  --radius: 0.875rem;
-  --radius-sm: 0.5rem;
+  /* App chrome (UI shell) */
+  --bg-app: #1a1638;
+  --surface: rgba(255, 255, 255, 0.08);
+  --surface-strong: rgba(20, 32, 56, 0.7);
+  --border: rgba(255, 255, 255, 0.16);
+  --text-app: #f5f4ff;
+  --text-muted-app: rgba(245, 244, 255, 0.65);
+  --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.28);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.36);
+
+  /* Output frame — gradient mesh + glass card */
+  --frame-c1: #281c59;
+  --frame-c2: #4e8d9c;
+  --frame-c3: #85c79a;
+  --frame-c4: #edf7bd;
+
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.28);
+  --glass-border-top: rgba(255, 255, 255, 0.55);
+  --glass-border-bottom: rgba(255, 255, 255, 0.16);
+
+  --text-body: #ffffff;
+  --text-quote: #d8c4ec;
+  --text-strong: #ffffff;
+  --text-italic: rgba(255, 255, 255, 0.7);
+  --text-divider: rgba(255, 255, 255, 0.22);
+
+  --radius: 1.25rem;
+  --radius-sm: 0.625rem;
+
   --font-sans:
     "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, sans-serif;
@@ -26,10 +47,17 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: var(--bg-app);
+  background:
+    radial-gradient(ellipse 70% 60% at 15% 100%, #85c79a 0%, transparent 55%),
+    radial-gradient(ellipse 60% 55% at 100% 85%, #edf7bd 0%, transparent 50%),
+    radial-gradient(ellipse 75% 65% at 80% 10%, #4e8d9c 0%, transparent 55%),
+    radial-gradient(ellipse 90% 80% at 20% 0%, #281c59 0%, transparent 65%),
+    linear-gradient(160deg, #281c59 0%, #4e8d9c 50%, #85c79a 100%);
+  background-attachment: fixed;
   font-family: var(--font-sans);
-  color: var(--text-body);
+  color: var(--text-app);
   -webkit-text-size-adjust: 100%;
+  min-height: 100dvh;
 }
 
 button,
@@ -51,9 +79,14 @@ textarea {
   justify-content: space-between;
   gap: 1rem;
   padding: 0.75rem 1.25rem;
-  background: var(--surface);
+  background: rgba(20, 32, 56, 0.45);
   border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(28px) saturate(1.5);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
   flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .brand {
@@ -61,6 +94,7 @@ textarea {
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: -0.01em;
+  color: var(--text-app);
 }
 
 .toolbar {
@@ -74,37 +108,66 @@ textarea {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.8rem;
-  color: var(--text-muted);
+  font-size: 0.78rem;
+  color: var(--text-muted-app);
+  font-weight: 500;
 }
 
 .toolbar-field select {
-  padding: 0.35rem 0.5rem;
+  padding: 0.35rem 0.55rem;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  background: var(--surface);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-app);
   font-size: 0.85rem;
-  color: var(--text-body);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
+/* Aqua glossy button — iOS v1 vibe */
 .btn-primary {
-  padding: 0.45rem 0.9rem;
-  background: var(--text-body);
+  padding: 0.5rem 1.1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-top-color: rgba(255, 255, 255, 0.85);
+  border-bottom-color: rgba(255, 255, 255, 0.22);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0.22) 49%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.18) 100%
+  );
   color: #ffffff;
-  border: none;
-  border-radius: var(--radius-sm);
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.005em;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.18);
   cursor: pointer;
-  transition: opacity 0.15s ease;
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.08),
+    0 4px 14px rgba(0, 0, 0, 0.28);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.btn-primary:hover {
-  opacity: 0.86;
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.08),
+    0 6px 18px rgba(0, 0, 0, 0.32);
 }
 
 .btn-primary:active {
-  transform: translateY(1px);
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: wait;
 }
 
 .workspace {
@@ -118,12 +181,15 @@ textarea {
 
 .editor-pane,
 .preview-pane {
-  background: var(--surface);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-sm), inset 0 1px rgba(255, 255, 255, 0.14);
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
 }
 
 .editor-pane textarea {
@@ -136,10 +202,13 @@ textarea {
   background: transparent;
   font-size: 0.95rem;
   line-height: 1.6;
-  color: var(--text-body);
-  font-family:
-    "Pretendard Variable", "Pretendard", ui-monospace, "SF Mono", Menlo,
-    monospace;
+  color: var(--text-app);
+  font-family: var(--font-sans);
+  font-weight: 500;
+}
+
+.editor-pane textarea::placeholder {
+  color: var(--text-muted-app);
 }
 
 .preview-pane {
@@ -149,18 +218,15 @@ textarea {
   overflow: auto;
 }
 
-/* ─── Output frame (the actual rendered image) ─── */
+/* ─── Output frame — gradient mesh + frosted glass card ─── */
 .frame {
-  background:
-    radial-gradient(ellipse 60% 50% at 20% 0%, var(--bg-frame) 0%, transparent 60%),
-    radial-gradient(ellipse 70% 60% at 100% 100%, var(--bg-frame-2) 0%, transparent 60%),
-    var(--bg-frame);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
-  overflow: hidden;
   position: relative;
   width: 100%;
   max-width: 480px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
 }
 
 .frame[data-ratio="1:1"] {
@@ -175,14 +241,73 @@ textarea {
   aspect-ratio: 9 / 16;
 }
 
+.frame-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 15% 100%, var(--frame-c3) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 55% at 100% 85%, var(--frame-c4) 0%, transparent 50%),
+    radial-gradient(ellipse 75% 65% at 80% 10%, var(--frame-c2) 0%, transparent 55%),
+    radial-gradient(ellipse 90% 80% at 20% 0%, var(--frame-c1) 0%, transparent 65%),
+    linear-gradient(160deg, var(--frame-c1) 0%, var(--frame-c2) 50%, var(--frame-c3) 100%);
+}
+
+.glass-card {
+  position: absolute;
+  inset: 6%;
+  z-index: 1;
+  border-radius: 1rem;
+  padding: 8% 8%;
+  background: var(--glass-bg);
+  border: 1.5px solid var(--glass-border);
+  border-top-color: var(--glass-border-top);
+  border-bottom-color: var(--glass-border-bottom);
+  backdrop-filter: blur(28px) saturate(2.2) brightness(1.08);
+  -webkit-backdrop-filter: blur(28px) saturate(2.2) brightness(1.08);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.32),
+    0 0 0 0.5px rgba(255, 255, 255, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.55),
+    inset 0 10px 22px -10px rgba(255, 255, 255, 0.35),
+    inset 0 -10px 22px -10px rgba(0, 0, 0, 0.12),
+    inset 0 -1.5px 0 rgba(255, 255, 255, 0.18);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Specular highlight on top edge */
+.glass-card::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 14%;
+  right: 14%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.85) 30%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(255, 255, 255, 0.85) 70%,
+    transparent 100%
+  );
+  border-radius: 9999px;
+  z-index: 2;
+  pointer-events: none;
+  filter: blur(0.3px);
+}
+
 .content {
-  padding: 14% 11%;
-  font-size: clamp(0.85rem, 0.6rem + 0.9vw, 1.05rem);
+  font-size: clamp(0.82rem, 0.55rem + 0.85vw, 1rem);
   line-height: 1.85;
   letter-spacing: -0.005em;
   font-weight: 500;
-  height: 100%;
-  overflow: hidden;
+  color: var(--text-body);
+  position: relative;
+  z-index: 1;
 }
 
 .content p {
@@ -202,7 +327,7 @@ textarea {
 }
 
 .content blockquote p {
-  margin: 0 0 0.15em 0;
+  margin: 0 0 0.2em 0;
   color: inherit;
 }
 
@@ -212,18 +337,18 @@ textarea {
 
 .content em {
   font-style: italic;
-  color: var(--text-muted);
+  color: var(--text-italic);
 }
 
 .content strong {
   font-weight: 700;
-  color: var(--text-body);
+  color: var(--text-strong);
 }
 
 .content hr {
   border: none;
   border-top: 1px solid var(--text-divider);
-  margin: 1.5em auto;
+  margin: 1.4em auto;
   width: 30%;
 }
 
@@ -237,4 +362,37 @@ textarea {
     padding: 1rem;
     font-size: 0.9rem;
   }
+  .topbar {
+    padding: 0.6rem 0.9rem;
+  }
+  .toolbar {
+    gap: 0.5rem;
+  }
+  .toolbar-field {
+    font-size: 0.72rem;
+  }
+}
+
+/* ─── Scrollbar ─── */
+* {
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 0.45rem;
+  height: 0.45rem;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
 }
