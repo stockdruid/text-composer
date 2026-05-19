@@ -276,7 +276,7 @@ textarea {
   inset: 6%;
   z-index: 1;
   border-radius: 1rem;
-  padding: 8% 8%;
+  padding: 12% 11%;
   background: var(--glass-bg);
   border: 1.5px solid var(--glass-border);
   border-top-color: var(--glass-border-top);
@@ -321,7 +321,7 @@ textarea {
 .content {
   --content-fs: 16px;
   font-size: var(--content-fs);
-  line-height: 1.7;
+  line-height: 1.5;
   letter-spacing: -0.005em;
   font-weight: 500;
   color: var(--text-body);
@@ -331,7 +331,7 @@ textarea {
 }
 
 .content p {
-  margin: 0 0 1.2em 0;
+  margin: 0 0 1em 0;
 }
 
 .content p:last-child {
@@ -339,7 +339,7 @@ textarea {
 }
 
 .content blockquote {
-  margin: 0 0 1.2em 0;
+  margin: 0 0 1em 0;
   padding: 0;
   border: none;
   color: var(--text-quote);
@@ -347,7 +347,7 @@ textarea {
 }
 
 .content blockquote p {
-  margin: 0 0 0.2em 0;
+  margin: 0 0 0.15em 0;
   color: inherit;
 }
 
