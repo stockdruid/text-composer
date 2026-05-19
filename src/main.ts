@@ -6,6 +6,7 @@ import { exportFrameAsPng } from './export/toPng';
 
 const STORAGE_KEY = 'text-composer:draft';
 const FONT_KEY = 'text-composer:font';
+const SIZE_KEY = 'text-composer:size';
 
 const DEFAULT_TEXT = `> "You need a manager. A compass to tell you when to eat, when to sleep, when to step out of the rain so you don't freeze to death."
 > (네겐 관리자가 필요해. 언제 밥을 먹어야 할지, 언제 자야 할지, 얼어 죽지 않으려면 언제 비를 피해야 할지 지시해 줄 나침반 말이야.)
@@ -21,6 +22,7 @@ const frame = document.querySelector<HTMLElement>('#frame')!;
 const glassCard = frame.querySelector<HTMLElement>('.glass-card')!;
 const presetSelect = document.querySelector<HTMLSelectElement>('#preset')!;
 const fontSelect = document.querySelector<HTMLSelectElement>('#font')!;
+const sizeSelect = document.querySelector<HTMLSelectElement>('#size')!;
 const ratioSelect = document.querySelector<HTMLSelectElement>('#ratio')!;
 const exportBtn = document.querySelector<HTMLButtonElement>('#export')!;
 const charCounter = document.querySelector<HTMLElement>('#char-counter')!;
@@ -43,13 +45,17 @@ const savedFont = localStorage.getItem(FONT_KEY) ?? '';
 fontSelect.value = savedFont;
 applyFont(savedFont);
 
+const savedSize = localStorage.getItem(SIZE_KEY);
+if (savedSize) sizeSelect.value = savedSize;
+
 editor.value = localStorage.getItem(STORAGE_KEY) ?? DEFAULT_TEXT;
 
 let scheduled = 0;
 function scheduleRefit(): void {
   cancelAnimationFrame(scheduled);
   scheduled = requestAnimationFrame(() => {
-    const { fontSize, overflow } = autofit(content, glassCard);
+    const maxFs = parseFloat(sizeSelect.value) || 13;
+    const { fontSize, overflow } = autofit(content, glassCard, maxFs);
     const count = editor.value.length;
     charCounter.textContent = overflow
       ? `${count}자 · 넘침`
@@ -79,6 +85,11 @@ fontSelect.addEventListener('change', () => {
   localStorage.setItem(FONT_KEY, v);
   // Wait one tick so swapped font metrics are applied before refit
   requestAnimationFrame(scheduleRefit);
+});
+
+sizeSelect.addEventListener('change', () => {
+  localStorage.setItem(SIZE_KEY, sizeSelect.value);
+  scheduleRefit();
 });
 
 ratioSelect.addEventListener('change', () => {

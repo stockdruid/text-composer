@@ -27,17 +27,19 @@ function fits(content: HTMLElement, avail: { w: number; h: number }): boolean {
 export function autofit(
   content: HTMLElement,
   container: HTMLElement,
+  maxFs: number = MAX_FS,
+  minFs: number = MIN_FS,
 ): FitResult {
   const avail = getAvailable(container);
 
-  content.style.setProperty('--content-fs', `${MAX_FS}px`);
+  content.style.setProperty('--content-fs', `${maxFs}px`);
   if (fits(content, avail)) {
-    return { fontSize: MAX_FS, overflow: false };
+    return { fontSize: maxFs, overflow: false };
   }
 
-  let lo = MIN_FS;
-  let hi = MAX_FS;
-  let best = MIN_FS;
+  let lo = minFs;
+  let hi = maxFs;
+  let best = minFs;
   for (let i = 0; i < ITERATIONS; i++) {
     const mid = (lo + hi) / 2;
     content.style.setProperty('--content-fs', `${mid}px`);
@@ -49,7 +51,7 @@ export function autofit(
     }
   }
 
-  const finalFs = Math.max(MIN_FS, best);
+  const finalFs = Math.max(minFs, best);
   content.style.setProperty('--content-fs', `${finalFs}px`);
   const overflow = !fits(content, avail);
   return { fontSize: finalFs, overflow };
