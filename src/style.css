@@ -3,6 +3,42 @@
    Multi-color gradient mesh + frosted glass card
    ═══════════════════════════════════════════════ */
 
+/* ─── Custom Korean fonts (noonfonts CDN) ─── */
+@font-face {
+  font-family: "DungGeunMo";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff") format("woff");
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SongamLeeHyeongSik";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2604-1@1.0/SongamIhyeongsik-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "BookkMyungjo";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/BookkMyungjo-Lt.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "BookkMyungjo";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/BookkMyungjo-Bd.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NostalgicPoliceVibe";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2601-6@1.0/Griun_PolSensibility-Rg.woff2") format("woff2");
+  font-weight: normal;
+  font-display: swap;
+}
+
 :root {
   /* App chrome (UI shell) */
   --bg-app: #1a1638;
@@ -759,4 +795,33 @@ textarea {
   border-radius: 0.4em;
   margin: 0 0 0.75em 0;
   font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════════
+   FONT OVERRIDES — user-selected font wins over theme default
+   ═══════════════════════════════════════════════ */
+.frame[data-font="pretendard"] .content,
+.frame[data-font="pretendard"] .content * {
+  font-family: "Pretendard", "Pretendard Variable", -apple-system, sans-serif !important;
+}
+
+.frame[data-font="dunggeun"] .content,
+.frame[data-font="dunggeun"] .content * {
+  font-family: "DungGeunMo", "Pretendard", monospace !important;
+  letter-spacing: 0 !important;
+}
+
+.frame[data-font="songam"] .content,
+.frame[data-font="songam"] .content * {
+  font-family: "SongamLeeHyeongSik", "Pretendard", sans-serif !important;
+}
+
+.frame[data-font="bookk"] .content,
+.frame[data-font="bookk"] .content * {
+  font-family: "BookkMyungjo", "Pretendard", serif !important;
+}
+
+.frame[data-font="police"] .content,
+.frame[data-font="police"] .content * {
+  font-family: "NostalgicPoliceVibe", "Pretendard", sans-serif !important;
 }

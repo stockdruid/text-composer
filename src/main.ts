@@ -5,6 +5,7 @@ import { presets, applyPreset } from './theme/presets';
 import { exportFrameAsPng } from './export/toPng';
 
 const STORAGE_KEY = 'text-composer:draft';
+const FONT_KEY = 'text-composer:font';
 
 const DEFAULT_TEXT = `> "You need a manager. A compass to tell you when to eat, when to sleep, when to step out of the rain so you don't freeze to death."
 > (네겐 관리자가 필요해. 언제 밥을 먹어야 할지, 언제 자야 할지, 얼어 죽지 않으려면 언제 비를 피해야 할지 지시해 줄 나침반 말이야.)
@@ -19,6 +20,7 @@ const content = document.querySelector<HTMLElement>('#content')!;
 const frame = document.querySelector<HTMLElement>('#frame')!;
 const glassCard = frame.querySelector<HTMLElement>('.glass-card')!;
 const presetSelect = document.querySelector<HTMLSelectElement>('#preset')!;
+const fontSelect = document.querySelector<HTMLSelectElement>('#font')!;
 const ratioSelect = document.querySelector<HTMLSelectElement>('#ratio')!;
 const exportBtn = document.querySelector<HTMLButtonElement>('#export')!;
 const charCounter = document.querySelector<HTMLElement>('#char-counter')!;
@@ -31,6 +33,15 @@ for (const p of presets) {
 }
 presetSelect.value = presets[0]!.id;
 applyPreset(frame, presetSelect.value);
+
+function applyFont(value: string): void {
+  if (value) frame.dataset.font = value;
+  else delete frame.dataset.font;
+}
+
+const savedFont = localStorage.getItem(FONT_KEY) ?? '';
+fontSelect.value = savedFont;
+applyFont(savedFont);
 
 editor.value = localStorage.getItem(STORAGE_KEY) ?? DEFAULT_TEXT;
 
@@ -59,6 +70,15 @@ editor.addEventListener('input', () => {
 
 presetSelect.addEventListener('change', () => {
   applyPreset(frame, presetSelect.value);
+  scheduleRefit();
+});
+
+fontSelect.addEventListener('change', () => {
+  const v = fontSelect.value;
+  applyFont(v);
+  localStorage.setItem(FONT_KEY, v);
+  // Wait one tick so swapped font metrics are applied before refit
+  requestAnimationFrame(scheduleRefit);
 });
 
 ratioSelect.addEventListener('change', () => {
