@@ -4,8 +4,8 @@
  * overflow=true means content still exceeds available area at MIN_FS.
  */
 
-export const MIN_FS = 11;
-export const MAX_FS = 17;
+export const MIN_FS = 8;
+export const MAX_FS = 13;
 const ITERATIONS = 10;
 
 export type FitResult = { fontSize: number; overflow: boolean };
