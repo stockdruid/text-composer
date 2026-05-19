@@ -113,6 +113,24 @@ textarea {
   font-weight: 500;
 }
 
+.char-counter {
+  font-size: 0.72rem;
+  color: var(--text-muted-app);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  padding: 0.25rem 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.06);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.char-counter.is-overflow {
+  color: #ffb088;
+  border-color: rgba(255, 176, 136, 0.6);
+  background: rgba(255, 176, 136, 0.12);
+}
+
 .toolbar-field select {
   padding: 0.35rem 0.55rem;
   border: 1px solid var(--border);
@@ -301,13 +319,15 @@ textarea {
 }
 
 .content {
-  font-size: clamp(0.82rem, 0.55rem + 0.85vw, 1rem);
-  line-height: 1.85;
+  --content-fs: 16px;
+  font-size: var(--content-fs);
+  line-height: 1.7;
   letter-spacing: -0.005em;
   font-weight: 500;
   color: var(--text-body);
   position: relative;
   z-index: 1;
+  width: 100%;
 }
 
 .content p {

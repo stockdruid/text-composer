@@ -1,5 +1,6 @@
 import './style.css';
 import { renderMarkdown } from './renderer/parseMd';
+import { autofit, MIN_FS } from './renderer/autofit';
 import { presets, applyPreset } from './theme/presets';
 import { exportFrameAsPng } from './export/toPng';
 
@@ -16,9 +17,11 @@ const DEFAULT_TEXT = `> "You need a manager. A compass to tell you when to eat, 
 const editor = document.querySelector<HTMLTextAreaElement>('#editor')!;
 const content = document.querySelector<HTMLElement>('#content')!;
 const frame = document.querySelector<HTMLElement>('#frame')!;
+const glassCard = frame.querySelector<HTMLElement>('.glass-card')!;
 const presetSelect = document.querySelector<HTMLSelectElement>('#preset')!;
 const ratioSelect = document.querySelector<HTMLSelectElement>('#ratio')!;
 const exportBtn = document.querySelector<HTMLButtonElement>('#export')!;
+const charCounter = document.querySelector<HTMLElement>('#char-counter')!;
 
 for (const p of presets) {
   const opt = document.createElement('option');
@@ -31,8 +34,22 @@ applyPreset(frame, presetSelect.value);
 
 editor.value = localStorage.getItem(STORAGE_KEY) ?? DEFAULT_TEXT;
 
+let scheduled = 0;
+function scheduleRefit(): void {
+  cancelAnimationFrame(scheduled);
+  scheduled = requestAnimationFrame(() => {
+    const { fontSize, overflow } = autofit(content, glassCard);
+    const count = editor.value.length;
+    charCounter.textContent = overflow
+      ? `${count}자 · 넘침`
+      : `${count}자 · ${fontSize.toFixed(0)}px`;
+    charCounter.classList.toggle('is-overflow', overflow);
+  });
+}
+
 function refresh(): void {
   content.innerHTML = renderMarkdown(editor.value);
+  scheduleRefit();
 }
 
 editor.addEventListener('input', () => {
@@ -46,6 +63,7 @@ presetSelect.addEventListener('change', () => {
 
 ratioSelect.addEventListener('change', () => {
   frame.dataset.ratio = ratioSelect.value;
+  scheduleRefit();
 });
 
 exportBtn.addEventListener('click', async () => {
@@ -64,4 +82,11 @@ exportBtn.addEventListener('click', async () => {
   }
 });
 
+// Refit on viewport changes (glass-card size depends on frame which depends on viewport)
+const ro = new ResizeObserver(scheduleRefit);
+ro.observe(glassCard);
+window.addEventListener('resize', scheduleRefit);
+
 refresh();
+
+console.log(`[text-composer] min font-size: ${MIN_FS}px`);
