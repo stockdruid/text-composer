@@ -8,13 +8,7 @@ const STORAGE_KEY = 'text-composer:draft';
 const FONT_KEY = 'text-composer:font';
 const SIZE_KEY = 'text-composer:size';
 
-const DEFAULT_TEXT = `> "You need a manager. A compass to tell you when to eat, when to sleep, when to step out of the rain so you don't freeze to death."
-> (네겐 관리자가 필요해. 언제 밥을 먹어야 할지, 언제 자야 할지, 얼어 죽지 않으려면 언제 비를 피해야 할지 지시해 줄 나침반 말이야.)
-
-그의 입술 끝이 유려하게 말려 올라갔다.
-
-> "I will be that compass for you."
-> (내가 그 나침반이 되어주지.)`;
+const DEFAULT_TEXT = '';
 
 const editor = document.querySelector<HTMLTextAreaElement>('#editor')!;
 const content = document.querySelector<HTMLElement>('#content')!;
