@@ -73,13 +73,35 @@ presetSelect.addEventListener('change', () => {
   scheduleRefit();
 });
 
-fontSelect.addEventListener('change', () => {
+const FONT_FAMILY: Record<string, string> = {
+  pretendard: 'Pretendard',
+  dunggeun: 'DungGeunMo',
+  songam: 'SongamLeeHyeongSik',
+  bookk: 'BookkMyungjo',
+  police: 'NostalgicPoliceVibe',
+};
+
+async function ensureFontLoaded(key: string): Promise<void> {
+  const fam = FONT_FAMILY[key];
+  if (!fam) return;
+  try {
+    await document.fonts.load(`16px "${fam}"`);
+    await document.fonts.ready;
+  } catch (err) {
+    console.warn('font load failed', err);
+  }
+}
+
+fontSelect.addEventListener('change', async () => {
   const v = fontSelect.value;
   applyFont(v);
   localStorage.setItem(FONT_KEY, v);
-  // Wait one tick so swapped font metrics are applied before refit
-  requestAnimationFrame(scheduleRefit);
+  await ensureFontLoaded(v);
+  scheduleRefit();
 });
+
+// Initial preload of saved font so first autofit uses correct metrics
+ensureFontLoaded(savedFont).then(scheduleRefit);
 
 sizeSelect.addEventListener('change', () => {
   localStorage.setItem(SIZE_KEY, sizeSelect.value);
