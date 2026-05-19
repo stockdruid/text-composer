@@ -24,6 +24,11 @@ function fits(content: HTMLElement, avail: { w: number; h: number }): boolean {
   return content.scrollHeight <= avail.h && content.scrollWidth <= avail.w;
 }
 
+function setFs(content: HTMLElement, px: number): void {
+  content.style.fontSize = `${px}px`;
+  content.style.setProperty('--content-fs', `${px}px`);
+}
+
 export function autofit(
   content: HTMLElement,
   container: HTMLElement,
@@ -32,7 +37,7 @@ export function autofit(
 ): FitResult {
   const avail = getAvailable(container);
 
-  content.style.setProperty('--content-fs', `${maxFs}px`);
+  setFs(content, maxFs);
   if (fits(content, avail)) {
     return { fontSize: maxFs, overflow: false };
   }
@@ -42,7 +47,7 @@ export function autofit(
   let best = minFs;
   for (let i = 0; i < ITERATIONS; i++) {
     const mid = (lo + hi) / 2;
-    content.style.setProperty('--content-fs', `${mid}px`);
+    setFs(content, mid);
     if (fits(content, avail)) {
       best = mid;
       lo = mid;
@@ -52,7 +57,7 @@ export function autofit(
   }
 
   const finalFs = Math.max(minFs, best);
-  content.style.setProperty('--content-fs', `${finalFs}px`);
+  setFs(content, finalFs);
   const overflow = !fits(content, avail);
   return { fontSize: finalFs, overflow };
 }
