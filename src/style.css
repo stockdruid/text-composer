@@ -422,24 +422,23 @@ textarea {
    per data-theme attribute. Default ("glass") is above.
    ═══════════════════════════════════════════════ */
 
-/* ─── Animal Crossing — cream paper card on green gradient ─── */
+/* ─── Animal Crossing — clean white card on mint + triangle pattern bg ─── */
 .frame[data-theme="ac"] .frame-bg {
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 0%, #a8d8a0 0%, transparent 60%),
-    radial-gradient(ellipse 90% 70% at 50% 100%, #fff8e7 0%, transparent 55%),
-    linear-gradient(170deg, #1f2a1c 0%, #4a7a3e 45%, #a8d8a0 100%);
+  background-color: #7ac084;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='70' height='70' viewBox='0 0 70 70'><g fill='%234e9963' opacity='0.42'><polygon points='10,16 15,24 5,24'/><polygon points='38,8 43,16 33,16'/><polygon points='58,30 63,38 53,38'/><polygon points='22,46 27,54 17,54'/><polygon points='52,56 57,64 47,64'/></g></svg>");
+  background-size: 90px 90px;
 }
 
 .frame[data-theme="ac"] .glass-card {
-  background: #fffae4;
-  border: 2.5px solid rgba(139, 111, 71, 0.4);
+  background: #ffffff;
+  border: none;
   border-radius: 1.25rem;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   box-shadow:
-    0 6px 0 rgba(74, 122, 62, 0.55),
-    0 12px 28px rgba(31, 42, 28, 0.32),
-    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+    0 10px 28px rgba(40, 80, 50, 0.22),
+    0 3px 8px rgba(40, 80, 50, 0.12);
+  padding: 14% 9%;
 }
 
 .frame[data-theme="ac"] .glass-card::before {
@@ -453,77 +452,152 @@ textarea {
 }
 
 .frame[data-theme="ac"] .content blockquote {
+  background: #f5f8e8;
+  border-left: 3px solid #7ac084;
+  padding: 0.5em 0.75em;
+  border-radius: 0.4em;
+  margin: 0 0 0.75em 0;
   font-weight: 800;
 }
 
-/* ─── Overgrown — pixel panel on scanline + vine bg ─── */
+/* ─── Overgrown — olive grid panel with vines on deep navy bg ─── */
 .frame[data-theme="overgrown"] .frame-bg {
-  background-color: #1a2820;
+  background-color: #2a2a4e;
   background-image:
-    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.18) 0px, rgba(0, 0, 0, 0.18) 1px, transparent 1px, transparent 3px),
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><g fill='none' stroke='%237ec488' stroke-width='1' opacity='0.16'><path d='M10 110 Q 20 80 30 90 T 50 70 T 70 80 T 100 60'/><circle cx='25' cy='85' r='2'/><circle cx='48' cy='73' r='1.5'/><circle cx='72' cy='78' r='2'/><path d='M90 20 Q 100 30 95 45 T 80 60'/><circle cx='95' cy='42' r='1.5'/></g></svg>");
-  background-size: 100% 4px, 240px 240px;
-  background-attachment: local;
+    radial-gradient(circle at 20% 80%, rgba(126, 196, 136, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(72, 60, 100, 0.4) 0%, transparent 50%);
 }
 
 .frame[data-theme="overgrown"] .glass-card {
-  background: rgba(28, 44, 36, 0.94);
-  border: 2.5px solid rgba(126, 196, 136, 0.42);
-  border-radius: 0.5rem;
+  background-color: #8a9070;
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0, transparent 19px, rgba(40, 50, 30, 0.28) 19px, rgba(40, 50, 30, 0.28) 20px),
+    repeating-linear-gradient(90deg, transparent 0, transparent 19px, rgba(40, 50, 30, 0.28) 19px, rgba(40, 50, 30, 0.28) 20px);
+  border: 3px solid #3a3a28;
+  border-radius: 0.35rem;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   box-shadow:
-    0 4px 0 rgba(0, 0, 0, 0.4),
-    0 10px 22px rgba(0, 0, 0, 0.36),
-    inset 0 0 0 1px rgba(126, 196, 136, 0.12);
+    0 5px 0 rgba(0, 0, 0, 0.55),
+    0 10px 24px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 2px rgba(106, 116, 80, 0.6);
+  image-rendering: pixelated;
+  padding: 26% 8% 10%;
 }
 
+/* Top-left moss cluster overflowing the corner */
 .frame[data-theme="overgrown"] .glass-card::before {
-  display: none;
+  content: "";
+  position: absolute;
+  top: -14px;
+  left: -14px;
+  width: 58%;
+  height: 42%;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 100' fill='none'><rect x='0' y='0' width='95' height='52' fill='%234a6840'/><circle cx='12' cy='14' r='10' fill='%237ec488'/><circle cx='34' cy='10' r='12' fill='%237ec488'/><circle cx='58' cy='16' r='11' fill='%2398d890'/><circle cx='82' cy='12' r='9' fill='%237ec488'/><circle cx='22' cy='38' r='8' fill='%2398d890'/><circle cx='52' cy='42' r='9' fill='%2398d890'/><circle cx='78' cy='36' r='7' fill='%237ec488'/><circle cx='95' cy='28' r='6' fill='%2398d890'/><circle cx='6' cy='52' r='5' fill='%2398d890'/><path d='M30 52 Q 42 64 54 58 T 78 70' stroke='%237ec488' stroke-width='4' fill='none' stroke-linecap='round'/><path d='M75 50 Q 82 62 75 72' stroke='%234a6840' stroke-width='3' fill='none'/><circle cx='62' cy='30' r='4' fill='%23ff9bb8'/><circle cx='60' cy='30' r='1.5' fill='%23ffe884'/><circle cx='40' cy='52' r='3' fill='%23ffd84a'/><circle cx='90' cy='44' r='3' fill='%23ff9bb8'/></svg>");
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 3;
+  filter: none;
+  border-radius: 0;
+  display: block;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  inset: auto;
+  left: -14px;
+  top: -14px;
+  image-rendering: pixelated;
+}
+
+/* Bottom-right trailing vine */
+.frame[data-theme="overgrown"] .glass-card::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  width: 38%;
+  height: 28%;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 110 70' fill='none'><rect x='40' y='34' width='75' height='40' fill='%234a6840' opacity='0.92'/><circle cx='102' cy='42' r='9' fill='%237ec488'/><circle cx='82' cy='48' r='8' fill='%2398d890'/><circle cx='62' cy='54' r='7' fill='%237ec488'/><circle cx='46' cy='58' r='6' fill='%2398d890'/><path d='M50 44 Q 62 56 74 50' stroke='%237ec488' stroke-width='3' fill='none' stroke-linecap='round'/><circle cx='88' cy='38' r='3' fill='%23ff9bb8'/><circle cx='70' cy='44' r='2.5' fill='%23ffd84a'/></svg>");
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 3;
+  image-rendering: pixelated;
 }
 
 .frame[data-theme="overgrown"] .content {
   font-family: "Pixelify Sans", "Pretendard Variable", var(--font-sans);
   font-weight: 500;
   letter-spacing: 0;
+  position: relative;
+  z-index: 2;
 }
 
 .frame[data-theme="overgrown"] .content blockquote {
   font-weight: 600;
 }
 
-/* ─── Needy — Y2K dot grid + neon plum card ─── */
+/* ─── Needy — Y2K Win98 dialog: pastel gradient bg + title bar card ─── */
 .frame[data-theme="needy"] .frame-bg {
-  background-color: #1a1530;
-  background-image:
-    radial-gradient(ellipse 80% 65% at 50% 40%, rgba(255, 183, 229, 0.32) 0%, transparent 60%),
-    radial-gradient(circle at center, rgba(168, 224, 236, 0.18) 0%, transparent 70%),
-    radial-gradient(circle, rgba(255, 183, 229, 0.5) 1px, transparent 1.5px);
-  background-size: 100% 100%, 100% 100%, 16px 16px;
+  background:
+    linear-gradient(135deg, #d4b5e8 0%, #ffc4dc 40%, #b5d8f0 100%);
 }
 
 .frame[data-theme="needy"] .glass-card {
-  background: rgba(40, 28, 64, 0.88);
-  border: 2.5px solid #ffb7e5;
-  border-radius: 1.25rem;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: #ffffff;
+  border: 2px solid #c890c8;
+  border-radius: 0.4rem;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   box-shadow:
-    0 0 0 4px rgba(255, 183, 229, 0.22),
-    0 0 24px rgba(255, 183, 229, 0.4),
-    0 12px 32px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    4px 4px 0 rgba(200, 144, 200, 0.55),
+    0 10px 24px rgba(120, 80, 140, 0.28);
+  padding: calc(7% + 32px) 8% 10%;
 }
 
+/* Win98-style title bar */
 .frame[data-theme="needy"] .glass-card::before {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 183, 229, 0.85) 40%,
-    rgba(168, 224, 236, 1) 50%,
-    rgba(255, 183, 229, 0.85) 60%,
-    transparent 100%
-  );
+  content: "✦  text-composer";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 26px;
+  background: linear-gradient(180deg, #f0a8d8 0%, #c890c8 100%);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  font-family: var(--font-sans);
+  letter-spacing: 0.02em;
+  padding: 0 36px 0 10px;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #c890c8;
+  border-radius: 0;
+  filter: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  text-shadow: 0 1px 0 rgba(168, 100, 168, 0.45);
+}
+
+/* Close button [X] */
+.frame[data-theme="needy"] .glass-card::after {
+  content: "✕";
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  width: 16px;
+  height: 16px;
+  background: #ffffff;
+  border: 1.5px solid #c890c8;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 13px;
+  text-align: center;
+  color: #c890c8;
+  z-index: 4;
+  border-radius: 0.15rem;
+  font-family: var(--font-sans);
 }
 
 .frame[data-theme="needy"] .content {
