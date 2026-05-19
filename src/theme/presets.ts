@@ -1,4 +1,4 @@
-export type ThemeStyle = 'glass' | 'ac' | 'overgrown' | 'needy';
+export type ThemeStyle = 'glass' | 'ac' | 'overgrown' | 'needy' | 'memo' | 'carrd';
 
 export type Preset = {
   id: string;
@@ -110,6 +110,30 @@ export const presets: Preset[] = [
       '--text-strong': '#2a1040',
       '--text-italic': 'rgba(74, 40, 96, 0.72)',
       '--text-divider': 'rgba(200, 144, 200, 0.35)',
+    },
+  },
+  {
+    id: 'memo',
+    label: '메모지 (카와이)',
+    theme: 'memo',
+    vars: {
+      '--text-body': '#7a5234',
+      '--text-quote': '#d495a5',
+      '--text-strong': '#4a2818',
+      '--text-italic': 'rgba(122, 82, 52, 0.68)',
+      '--text-divider': 'rgba(212, 149, 165, 0.4)',
+    },
+  },
+  {
+    id: 'carrd',
+    label: '카드 (스트라이프)',
+    theme: 'carrd',
+    vars: {
+      '--text-body': '#7a5234',
+      '--text-quote': '#e895a8',
+      '--text-strong': '#4a2818',
+      '--text-italic': 'rgba(122, 82, 52, 0.68)',
+      '--text-divider': 'rgba(232, 149, 168, 0.4)',
     },
   },
 ];
