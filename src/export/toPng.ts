@@ -4,15 +4,22 @@ export async function exportFrameAsPng(
   frame: HTMLElement,
   filename = 'text-composer.png',
 ): Promise<void> {
-  const dataUrl = await toPng(frame, {
-    pixelRatio: 3,
-    cacheBust: true,
-    backgroundColor: getComputedStyle(frame).backgroundColor,
-  });
-  const link = document.createElement('a');
-  link.href = dataUrl;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
+  const originalRadius = frame.style.borderRadius;
+  frame.style.borderRadius = '0';
+  try {
+    const dataUrl = await toPng(frame, {
+      pixelRatio: 3,
+      cacheBust: true,
+      backgroundColor: getComputedStyle(frame).backgroundColor,
+      style: { borderRadius: '0' },
+    });
+    const link = document.createElement('a');
+    link.href = dataUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  } finally {
+    frame.style.borderRadius = originalRadius;
+  }
 }
