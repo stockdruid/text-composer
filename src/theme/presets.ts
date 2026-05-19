@@ -1,13 +1,17 @@
+export type ThemeStyle = 'glass' | 'ac' | 'overgrown' | 'needy';
+
 export type Preset = {
   id: string;
   label: string;
+  theme: ThemeStyle;
   vars: Record<string, string>;
 };
 
 export const presets: Preset[] = [
   {
     id: 'aurora',
-    label: '오로라 (기본)',
+    label: '오로라 (글라스)',
+    theme: 'glass',
     vars: {
       '--frame-c1': '#281c59',
       '--frame-c2': '#4e8d9c',
@@ -22,7 +26,8 @@ export const presets: Preset[] = [
   },
   {
     id: 'rose',
-    label: '로즈 글라스',
+    label: '로즈 (글라스)',
+    theme: 'glass',
     vars: {
       '--frame-c1': '#4a2a4a',
       '--frame-c2': '#c87a9c',
@@ -37,7 +42,8 @@ export const presets: Preset[] = [
   },
   {
     id: 'arctic',
-    label: '아크틱 (라이트)',
+    label: '아크틱 (글라스 라이트)',
+    theme: 'glass',
     vars: {
       '--frame-c1': '#a8c8ee',
       '--frame-c2': '#c8d8f0',
@@ -56,7 +62,8 @@ export const presets: Preset[] = [
   },
   {
     id: 'sunset',
-    label: '선셋',
+    label: '선셋 (글라스)',
+    theme: 'glass',
     vars: {
       '--frame-c1': '#3a1a4a',
       '--frame-c2': '#c84a6a',
@@ -72,60 +79,62 @@ export const presets: Preset[] = [
   {
     id: 'animal-crossing',
     label: '동물의 숲',
+    theme: 'ac',
     vars: {
-      '--frame-c1': '#1f2a1c',
-      '--frame-c2': '#4a7a3e',
-      '--frame-c3': '#a8d8a0',
-      '--frame-c4': '#fff8e7',
-      '--text-body': '#fff8e7',
-      '--text-quote': '#ffd843',
-      '--text-strong': '#ffffff',
-      '--text-italic': 'rgba(255, 248, 231, 0.7)',
-      '--text-divider': 'rgba(255, 248, 231, 0.24)',
+      '--text-body': '#2a2010',
+      '--text-quote': '#4a7a3e',
+      '--text-strong': '#3a2d18',
+      '--text-italic': 'rgba(42, 32, 16, 0.65)',
+      '--text-divider': 'rgba(139, 111, 71, 0.3)',
     },
   },
   {
     id: 'overgrown',
-    label: '오버그로운',
+    label: '오버그로운 (픽셀)',
+    theme: 'overgrown',
     vars: {
-      '--frame-c1': '#1a2820',
-      '--frame-c2': '#3a5044',
-      '--frame-c3': '#7ec488',
-      '--frame-c4': '#d4e4c8',
       '--text-body': '#d4e4c8',
       '--text-quote': '#e8c860',
       '--text-strong': '#ffffff',
       '--text-italic': 'rgba(212, 228, 200, 0.7)',
-      '--text-divider': 'rgba(212, 228, 200, 0.24)',
+      '--text-divider': 'rgba(126, 196, 136, 0.32)',
     },
   },
   {
     id: 'needy',
-    label: '니디 스트리머 (Y2K 핑크)',
+    label: '니디 (Y2K 네온)',
+    theme: 'needy',
     vars: {
-      '--frame-c1': '#1a1530',
-      '--frame-c2': '#4a2c5e',
-      '--frame-c3': '#c8b0e8',
-      '--frame-c4': '#ffb7e5',
       '--text-body': '#f0e0ff',
       '--text-quote': '#a8e0ec',
-      '--text-strong': '#ffffff',
-      '--text-italic': 'rgba(240, 224, 255, 0.7)',
-      '--text-divider': 'rgba(240, 224, 255, 0.24)',
+      '--text-strong': '#ffb7e5',
+      '--text-italic': 'rgba(240, 224, 255, 0.72)',
+      '--text-divider': 'rgba(255, 183, 229, 0.32)',
     },
   },
 ];
 
+const OVERRIDABLE = [
+  '--frame-c1',
+  '--frame-c2',
+  '--frame-c3',
+  '--frame-c4',
+  '--text-body',
+  '--text-quote',
+  '--text-strong',
+  '--text-italic',
+  '--text-divider',
+  '--glass-bg',
+  '--glass-border',
+  '--glass-border-top',
+  '--glass-border-bottom',
+];
+
 export function applyPreset(frame: HTMLElement, id: string): void {
   const preset = presets.find((p) => p.id === id) ?? presets[0]!;
-  const glassKeys = [
-    '--glass-bg',
-    '--glass-border',
-    '--glass-border-top',
-    '--glass-border-bottom',
-  ];
-  for (const k of glassKeys) frame.style.removeProperty(k);
+  for (const k of OVERRIDABLE) frame.style.removeProperty(k);
   for (const [k, v] of Object.entries(preset.vars)) {
     frame.style.setProperty(k, v);
   }
+  frame.dataset.theme = preset.theme;
 }

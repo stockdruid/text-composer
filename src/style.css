@@ -416,3 +416,121 @@ textarea {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.4);
 }
+
+/* ═══════════════════════════════════════════════
+   THEME VARIANTS — override frame, card, and content
+   per data-theme attribute. Default ("glass") is above.
+   ═══════════════════════════════════════════════ */
+
+/* ─── Animal Crossing — cream paper card on green gradient ─── */
+.frame[data-theme="ac"] .frame-bg {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, #a8d8a0 0%, transparent 60%),
+    radial-gradient(ellipse 90% 70% at 50% 100%, #fff8e7 0%, transparent 55%),
+    linear-gradient(170deg, #1f2a1c 0%, #4a7a3e 45%, #a8d8a0 100%);
+}
+
+.frame[data-theme="ac"] .glass-card {
+  background: #fffae4;
+  border: 2.5px solid rgba(139, 111, 71, 0.4);
+  border-radius: 1.25rem;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow:
+    0 6px 0 rgba(74, 122, 62, 0.55),
+    0 12px 28px rgba(31, 42, 28, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.frame[data-theme="ac"] .glass-card::before {
+  display: none;
+}
+
+.frame[data-theme="ac"] .content {
+  font-family: "Nunito", var(--font-sans);
+  font-weight: 700;
+  letter-spacing: -0.005em;
+}
+
+.frame[data-theme="ac"] .content blockquote {
+  font-weight: 800;
+}
+
+/* ─── Overgrown — pixel panel on scanline + vine bg ─── */
+.frame[data-theme="overgrown"] .frame-bg {
+  background-color: #1a2820;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.18) 0px, rgba(0, 0, 0, 0.18) 1px, transparent 1px, transparent 3px),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><g fill='none' stroke='%237ec488' stroke-width='1' opacity='0.16'><path d='M10 110 Q 20 80 30 90 T 50 70 T 70 80 T 100 60'/><circle cx='25' cy='85' r='2'/><circle cx='48' cy='73' r='1.5'/><circle cx='72' cy='78' r='2'/><path d='M90 20 Q 100 30 95 45 T 80 60'/><circle cx='95' cy='42' r='1.5'/></g></svg>");
+  background-size: 100% 4px, 240px 240px;
+  background-attachment: local;
+}
+
+.frame[data-theme="overgrown"] .glass-card {
+  background: rgba(28, 44, 36, 0.94);
+  border: 2.5px solid rgba(126, 196, 136, 0.42);
+  border-radius: 0.5rem;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow:
+    0 4px 0 rgba(0, 0, 0, 0.4),
+    0 10px 22px rgba(0, 0, 0, 0.36),
+    inset 0 0 0 1px rgba(126, 196, 136, 0.12);
+}
+
+.frame[data-theme="overgrown"] .glass-card::before {
+  display: none;
+}
+
+.frame[data-theme="overgrown"] .content {
+  font-family: "Pixelify Sans", "Pretendard Variable", var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.frame[data-theme="overgrown"] .content blockquote {
+  font-weight: 600;
+}
+
+/* ─── Needy — Y2K dot grid + neon plum card ─── */
+.frame[data-theme="needy"] .frame-bg {
+  background-color: #1a1530;
+  background-image:
+    radial-gradient(ellipse 80% 65% at 50% 40%, rgba(255, 183, 229, 0.32) 0%, transparent 60%),
+    radial-gradient(circle at center, rgba(168, 224, 236, 0.18) 0%, transparent 70%),
+    radial-gradient(circle, rgba(255, 183, 229, 0.5) 1px, transparent 1.5px);
+  background-size: 100% 100%, 100% 100%, 16px 16px;
+}
+
+.frame[data-theme="needy"] .glass-card {
+  background: rgba(40, 28, 64, 0.88);
+  border: 2.5px solid #ffb7e5;
+  border-radius: 1.25rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow:
+    0 0 0 4px rgba(255, 183, 229, 0.22),
+    0 0 24px rgba(255, 183, 229, 0.4),
+    0 12px 32px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.frame[data-theme="needy"] .glass-card::before {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 183, 229, 0.85) 40%,
+    rgba(168, 224, 236, 1) 50%,
+    rgba(255, 183, 229, 0.85) 60%,
+    transparent 100%
+  );
+}
+
+.frame[data-theme="needy"] .content {
+  font-family: var(--font-sans);
+  font-weight: 600;
+}
+
+.frame[data-theme="needy"] .content blockquote {
+  font-weight: 700;
+}
